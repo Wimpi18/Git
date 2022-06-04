@@ -42,9 +42,14 @@ Dos ramas modifican el mismo archivo, entonces Git no sabes que version del arch
 <center><img src="Ramas.png"></center>
 
 ## Fast forward
-Una rama se adhiere a la rama padre, la operación contraria sería que se crea una nueva rama como combinación de 2 ramas. 
-## COMANDO: --no--ff
-## COMANDO: --ours y --theirs
+Una rama A se fusiona a la rama B incluyendo los commits **(git merge rama)**.
+## No fast forward
+Una rama A se fusiona a la rama B integrados los cambios de A en B, pero con la diferencia de que la visualización de la rama A queda separada de la rama B **(git merge rama --no-ff)**.
+*Tanto si usamos Fast forward como No fast forward solo cambiara la forma en la que visualizaremos el histórico de nuestro repositorio*
+## COMANDO: git merge --ours rama
+Los cambios de la rama A se conservan mientras no hayan conflictos con la rama B, en caso de conflicto se prioriza lo que está en la rama B.
+## COMANDO: git merge --theirs rama
+Los cambios de la rama A se conservan mientras no hayan conflictos con la rama B, en caso de conflicto se prioriza lo que está en la rama A.
 ## pull request
 Petición para hacer cambios en la rama main.
 
@@ -52,16 +57,18 @@ Petición para hacer cambios en la rama main.
 ## GitHub
 Es un repositorio en la nube, existen otros como GitLab o Bitbucket.
 ## COMANDO: git remote -v
+Nos permite ver el repositorio remoto al que estamos conectados.
 ## COMANDO: git remote add origin link
 Obtenemos acceso al repositorio en la nube. <p>
 Origin es el fuente/origen del repositorio en el que trabajaremo en GitHub.
 ## COMANDO: git push 
-git push -u origin main <p>
-Subimos una rama a la rama main del repositorio origin.
+Subimos una rama al repositorio origin.
+1. **git push -u origin main**
 ## COMANDO: git clone link
-Comando para clonar la rama principal de un repositorio.
+Comando para clonar la rama principal de un repositorio pero con **git checkout rama** podemos ingresar a las otras ramas existentes del repositorio.
 ## COMANDO: git pull
-git pull origin nomRama
+Comando para agregar una rama a nuestro repositorio local, luego debemos escribir ***git checkout rama*** para ingresar a la rama y así poder visibilizarla con el **git branch**.
+1. **git pull origin nomRama**
 
 # OTRAS FUENTES
 ## Flujo de trabajo
