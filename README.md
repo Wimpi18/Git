@@ -35,7 +35,10 @@ Dos ramas modifican el mismo archivo, entonces Git no sabes que version del arch
 # CLASE 3
 ## Ramas
 1. Main/Master.- Es la rama principal.
-2. Otras ramas.- Son bifurcaciones de la rama principal, son copias del proyecto pero separada para poder ser trabajada.
+2. Otras ramas.- Son bifurcaciones de la rama principal, son copias del proyecto pero separada para poder ser trabajadas.
+<p></p>
+
+<center><img src="Ramas.png"></center>
 
 ## Fast forward
 Una rama se adhiere a la rama padre, la operación contraria sería que se crea una nueva rama como combinación de 2 ramas. 
@@ -47,7 +50,10 @@ Petición para hacer cambio en la rama main.
 
 # OTRAS FUENTES
 ## Flujo de trabajo
-1. Computador
-2. Stage
-3. Commit
-4. Server
+1. Computador.- Trabajo realizado en los distintos archivos de un proyecto.
+2. Stage.- Con git add seleccionamos los archivos que pasamos a la etapa stage para poder verificar los cambios de un archivo.
+3. Commit.- Con git commit comprometemos cambios de un archivo para poder pasarlos al repositorio.
+4. Server.- Con git push pasamos los cambios seleccionados a un servidor
+
+## Otros comandos
+1. Quitar un elemento que fue añadido al stage: **git restore --stager nomArchivo**
