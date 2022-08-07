@@ -111,6 +111,9 @@ Consiste en clonar el repositorio y emplear algunos de los anteriores Workflow
 3. Commit.- Con git commit comprometemos cambios de un archivo para poder pasarlos al repositorio.
 4. Server.- Con git push pasamos los cambios seleccionados a un servidor
 
+## Ignorar archivos y directorios
+Creamos el archivo .gitignore e indicamos los archivos y directorios que no queramos añadir al stage.
+
 ## Otros comandos
 1. Quitar un elemento que fue añadido al stage: **git restore --staged `<file>`**
 2. Recuperar un archivo eliminado: **git restore `<file>`**
