@@ -7,7 +7,7 @@ Comando para inicializar Git en un directorio.
 ## COMANDO: git add
 Indica a Git que quieres incluir actualizaciones en un archivo/directorio concreto en la próxima confirmación.
 ## COMANDO: git commit
-Comando para el generar un registro de un cambio. [Tipo commmit: descripción de 40 caracteres máximo]
+Comando para el generar un registro de un cambio. ***[Tipo commmit: descripción de 40 caracteres máximo]***
 1. git commit `<file>`
 2. git commit -m `<descripción>`
 3. git commit file -m `<descripción>`
@@ -104,6 +104,84 @@ Consiste en clonar el repositorio y emplear algunos de los anteriores Workflow
 
 ![Forking](Imágenes/Forking.png)
 
+# CLASE WINSOR
+## COMANDO: git fetch
+Nos permite descargar contenido (metadatos) desde un repositorio remoto, sirve para comprobar si hay algún cambio disponible, pero no hace modificaciones en los archivos a diferencia de git pull.<br>
+
+## COMANDO: git rebase
+Reorganiza, es decir puedes capturar todos los cambios confirmados en una rama y reaplicarlos sobre otra. No hay ninguna diferencia en el resultado final de la integración, pero el haberla hecho reorganizando nos deja un historial más claro. Si examinas el historial de una rama reorganizada, este aparece siempre como un historial lineal: como si todo el trabajo se hubiera realizado en series, aunque realmente se haya hecho en paralelo.<br>
+**Peligro de reorganizar.-** Nunca reorganices confirmaciones de cambio (commits) que hayas enviado (push) a un repositorio público.<br>
+**Reorganizar vs. Fusionar.-** La manera de sacar lo mejor de ambas es reorganizar tu trabajo local, que aún no has compartido, antes de enviarlo a algún lugar; pero nunca reorganizar nada que ya haya sido compartido.
+
+## Etiquetas (Tags)
+Sirven como un puntero, el cual se asocia a un commit especifico. Se usa típicamente para marcar versiones de lanzamiento.
+## COMANDO: git tag
+- Para enlistar todos los tags: **git tag**
+- Crear etiqueta anotada: **git tag -a `<nombre>` -m `<mensaje>`**
+- Crear etiqueta ligera: **git tag `<nombre>`**
+- Para ver la información de un commit asociado a una etiqueta: **git show `<etiqueta>`**
+- Para asociar etiquetas a un commit anterior: **git tag -a `<etiqueta>` `<SHA>`**
+
+## Merge
+Sirve para fusionar dos ramas, Git tiene varias estrategias de fusión y evalua automaticamente cual es más conveniente. Sin embargo pueden existir conflicto si hay modificaciones dispares en una misma porción de un mismo archivo en las dos ramas distintas que pretendes fusionar, Git no será capaz de fusionarlas directamente por lo que será necesario resolver el conflicto de manera manual (haciendo uso de mergetool).
+![Conflicto](Imágenes/ejemplo1Conflicto.png)
+Donde nos dice que la versión en HEAD (la rama master, la que habías activado antes de lanzar el comando de fusión) contiene lo indicado en la parte superior del bloque (todo lo que está encima de =======) y que la versión en iss53 contiene el resto, lo indicado en la parte inferior del bloque.<br>
+Una vez solucionado el conflicto debes realizar un commit y detallar como lo resolviste a no ser que resulte obvio.
+
+## Fork
+Sirve para crear una copia de un repositorio remoto en nuestra cuenta de GitHub, de esta manera tener total libertad para realizar modificaciones sin alterar el repositorio remoto original.
+
+## Pull request
+Posterior a los cambios en un repositorio fork, se realiza pull request como una petición de cambios en el repositorio remoto original.
+
+## Alias
+Sirve para relacionar un comando extenso a un comando elaborado por uno mismo.
+- Ejemplo 1: **git config --global alias.co checkout**
+- Ejemplo 2: **git config --global alias.last 'log -1 HEAD'**
+- Enlistar alias: **git config --list | grep alias**
+- Borrar alias: **git config --global --unset alias.`<nombreAlias>`**
+
+## Visualizar commits
+- Para observar commits individualmente: **git show**
+- Para observar los commits de la ramaB que no están en la ramaA: **git log `<ramaA>`..`<ramaB>`**
+- Para observar los commits de varias ramas que no posean commits de otras ramas: **git log `<rama1>` `<rama2>` `<ramaX>` --not `<ramaA>` `<ramaB>` `<ramaC>`**
+
+## Stash
+Son guardados rápidos y temporales que se hacen en Git, se usan para poder cambiar de rama sin realizar commits ni perjudicar la rama actual.
+- Guardar la rama temporalmente: **git stash**
+- Ver la lista de stash: **git stash list**
+- Recuperar un stash específico: **git stash apply stash@{`<N>`}**
+- Recuperar el último stash y lo elimina del stash: **git stash pop**
+- Eliminar un stash especifico: **git stash drop stash@{`<N>`}**
+- Eliminar todos los stash: **git stash clear**
+
+## Busquedas Grep
+Son realmente rápidas, busca a través de cualquier árbol en Git, no solo en el directorio de trabajo.
+- Encontrar coincidencias por archivo: **git grep -n `<pattern>`**
+- Enumerar coincidencias por archivo: **git grep -c `<pattern>`**
+
+## Fusión avanzada
+- Abortar una fusión: **git merge --abort**
+- Ignora los cambios en cualquier cantidad de espacios en blanco existentes: **git merge -Xignore-all-space**
+- Ignora por completo todos los cambios de espacios en blanco: **git merge -Xignore-space-change**
+- **git merge -X ours**
+- **git merge -X theirs**
+
+## RESET
+Ofrece el control de hacia donde apunta el HEAD, siendo N los pasos a retroceder el puntero hasta obtener un puntero anterior (no necesariamente retrocede linealmente) MÉTODO DESTRUCTIVO.
+- Mantiene los cambios que ocurrieron antes de hacer commit desde donde apuntaba: **git reset --soft HEAD~`<N>`**
+- Descarta los cambios: **git reset --hard HEAD~`<N>`**
+- Otra manera es indicando el SHA: **git reset HEAD `<SHA>`**
+
+## REVERT
+Revierte los cambios que un commit introdujo, y crea un nuevo commit con los cambios revertidos, MÉTODO NO DESTRUCTIVO.
+- **git revert `<SHA>`** o **git revert HEAD~`<N>`**
+
+## DIFF
+Compara dos rama y establece las diferencias en los orígenes de datos de Git
+- Por defecto se compara con su misma rama en remoto: **git diff**
+- Comparar con otra rama: **git diff `<ramaB>`**
+
 # OTRAS FUENTES
 ## Flujo de trabajo en GIT
 1. Computador.- Trabajo realizado en los distintos archivos de un proyecto.
@@ -113,6 +191,9 @@ Consiste en clonar el repositorio y emplear algunos de los anteriores Workflow
 
 ## Ignorar archivos y directorios
 Creamos el archivo .gitignore e indicamos los archivos y directorios que no queramos añadir al stage.
+
+## ¿Por qué origin?
+Es el nombre predeterminado que recibe el repositorio remoto principal, sin embargo cuando se trabaja con mas de un repositorio remoto estos puede ser asociados a otros nombres.
 
 ## Otros comandos
 1. Quitar un elemento que fue añadido al stage: **git restore --staged `<file>`**
